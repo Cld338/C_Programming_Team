@@ -6,22 +6,21 @@
 #include "user.h"
 
 struct User* loginScreen() {
+	struct User user;
+	char filename[120];
+	FILE* fp;
+
 
     for (int i = 0; i < 3; i++) printf("\n");
 
     for (int i = 0; i < 50; i++) printf(" ");
     setColor(14);
     printf("로그인\n");
-
-
     for (int i = 0; i < 3; i++) printf("\n");
 
-	struct User user;
-	char filename[120];
-	FILE* fp;
-
+	
 	printf("아이디를 입력하세요:");
-	scanf("%s", user.id);
+	scanf("%s", &(user.id));
 
 	sprintf(filename, "Scores/%s.txt", user.id); // 문자열에 서식지정자 적용하기
 
@@ -34,7 +33,7 @@ struct User* loginScreen() {
 		fclose(fp);
 	}
 	else {
-		fscanf(fp, "%d", &user.score);
+		fscanf(fp, "%d", &(user.score));
 		printf("기존점수:%d\n", user.score);
 		fclose(fp);
 	}

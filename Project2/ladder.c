@@ -1,16 +1,17 @@
 #include "ladder.h" 
+#include "util.h" 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-char* char_mul(const char* my_string, int k) {
+char* char_mul(const char* string, int k) {
     static char result[30];
     result[0] = '\0';
     int current_len = 0;
-    int segment_len = strlen(my_string);
+    int segment_len = strlen(string);
     for (int i = 0; i < k; i++) {
         if (current_len + segment_len < sizeof(result)) {
-            strcat(result, my_string);
+            strcat(result, string);
             current_len += segment_len;
         }
         else {
@@ -37,7 +38,7 @@ void random_ladder(int* ptr) {
         *ptr = 1;
     }
 }
-/*
+
 void make_path(int (*ladder_ptr)[ARR_SIZE][ARR_SIZE], int row, int col) {
     int pos_row = ARR_SIZE - 1;
     int pos_col = 0;
@@ -55,7 +56,6 @@ void make_path(int (*ladder_ptr)[ARR_SIZE][ARR_SIZE], int row, int col) {
             if (can_move_up) {
                 pos_row--;
                 if (pos_row >= row) {
-                    (*ladder_ptr)[pos_row][pos_col] = 1;
                     pos_row--;
                 }
                 else {
@@ -99,7 +99,7 @@ void make_path(int (*ladder_ptr)[ARR_SIZE][ARR_SIZE], int row, int col) {
         }
     }
 }
-*/
+
 
 void put_gem(int (*ladder_ptr)[ARR_SIZE][ARR_SIZE]) {
     int gem_count = 0;
@@ -143,13 +143,11 @@ void create_ladder(int (*ladder_ptr)[ARR_SIZE][ARR_SIZE]) {
             }
         }
     }
-    // make_path(ladder_ptr, 0, ARR_SIZE - 1); // 종료 지점 까지 길 만들기
+    make_path(ladder_ptr, 0, ARR_SIZE - 1); // 종료 지점 까지 길 만들기
     put_gem(ladder_ptr);
 }
 
 void print_ladder(int ladder[ARR_SIZE][ARR_SIZE]) {
-
-
     for (int i = 0; i < ARR_SIZE; i++) {
         if (i % 2 == 0) {
             for (int j = 0; j < ARR_SIZE; j++) {
@@ -161,9 +159,9 @@ void print_ladder(int ladder[ARR_SIZE][ARR_SIZE]) {
                         printf("%s", char_mul(HORIZONTAL_LINE_CHAR, HORIZONTAL_LENGTH));
                     }
                     else if (ladder[i][j] == 2) {
-                        printf("\033[0;32m");
+                        setColor(4);
                         printf("%s", char_mul(HORIZONTAL_LINE_CHAR, HORIZONTAL_LENGTH));
-                        printf("\033[0m");
+                        setColor(15);
                     }
                     else {
                         printf("%s", char_mul(" ", HORIZONTAL_LENGTH));
@@ -181,9 +179,9 @@ void print_ladder(int ladder[ARR_SIZE][ARR_SIZE]) {
                             printf("%s", VERTICAL_LINE_CHAR);
                         }
                         else if (ladder[i][j] == 2) {
-                            printf("\033[0;32m");
+                            setColor(4);
                             printf("%s", VERTICAL_LINE_CHAR);
-                            printf("\033[0m");
+                            setColor(0);
                         }
                         else {
                             printf(" ");
