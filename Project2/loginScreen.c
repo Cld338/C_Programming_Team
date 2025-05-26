@@ -3,9 +3,14 @@
 #include <stdio.h>
 #include <windows.h>
 #include "util.h"
-#include "user.h"
 
-struct User* loginScreen() {
+struct User {
+
+    char id[100];
+    int score;
+};
+
+void loginScreen() {
 
     for (int i = 0; i < 3; i++) printf("\n");
 
@@ -23,21 +28,18 @@ struct User* loginScreen() {
 	printf("아이디를 입력하세요:");
 	scanf("%s", user.id);
 
-	sprintf(filename, "Scores/%s.txt", user.id); // 문자열에 서식지정자 적용하기
+	sprintf(filename, "%s.txt", user.id);
 
 	fp = fopen(filename, "r");
 	if (fp == NULL) {
-		fp = fopen(filename, "w");
 		printf("새 사용자입니다. 초기 점수는 0입니다.\n");
 		user.score = 0;
-		fprintf(fp, "%d", user.score);
-		fclose(fp);
 	}
 	else {
+
 		fscanf(fp, "%d", &user.score);
 		printf("기존점수:%d\n", user.score);
 		fclose(fp);
+
 	}
-	setColor(15);
-	return &user;
 }

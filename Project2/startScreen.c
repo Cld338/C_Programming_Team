@@ -2,10 +2,17 @@
 #include <windows.h>
 #include <conio.h>
 #include "util.h"
-#include "startScreen.h";
-#include "user.h"
-#include "GameInfo.h";
-#include "loginScreen.h";
+
+#define UP 0
+#define DOWN 1
+#define LEFT 2
+#define RIGHT 3
+#define SUBMIT 4
+
+void titleDraw();
+int keyControl();
+int menuDraw();
+void gotoxy(int, int);
 
 void titleDraw() {
 
@@ -20,11 +27,47 @@ void titleDraw() {
 }
 
 
-void menuDraw() {
-    int menu;
+
+
+
+
+
+
+int keyControl() {
+    char temp = getch();
+
+    if (temp == 'w' || temp == 'W') {
+        return UP;
+    }
+    else if (temp == 'a' || temp == 'A') {
+        return LEFT;
+    }
+    else if (temp == 'd' || temp == 'D') {
+        return RIGHT;
+    }
+    else if (temp == 's' || temp == 'S') {
+        return DOWN;
+    }
+    else if (temp == ' ') {
+        return SUBMIT;
+    }
+}
+
+void gotoxy(int x, int y) {
+    COORD pos = { x, y };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+
+int menuDraw() {
+
+ 
+
     int x = 54;
     int y = 10;
-    struct User* user;
+
+
+   
 
     gotoxy(x - 1, y);
     printf(">게임시작");
@@ -33,9 +76,10 @@ void menuDraw() {
     gotoxy(x, y+2);
     printf("  종료  ");
     while (1) {
+
         int n = keyControl();
         switch (n) {
-        case UP: 
+        case UP: {
             if (y > 10) {
                 gotoxy(x - 1, y);
                 printf(" ");
@@ -43,8 +87,8 @@ void menuDraw() {
                 printf(">");
             }
             break;
-        
-        case DOWN:
+        }
+        case DOWN: {
             if (y < 12) {
                 gotoxy(x - 1, y);
                 printf(" ");
@@ -52,31 +96,13 @@ void menuDraw() {
                 printf(">");
             }
             break;
-        
-        case SUBMIT:
-            menu = y - 10;
-            break;
         }
-        if (n == SUBMIT) break;
+        case SUBMIT: {
+            return y - 10;
+        }
+        }
     }
 
-    if (menu == 0) {
-        system("cls");
-        show_cursor();
-        user = loginScreen();           // 로그인 화면으로
-        while (keyControl() != SUBMIT);
-    }
-    else if (menu == 1) {
-        system("cls");
-        GameInfo();      // 게임방법 화면으로
-        while (keyControl() != SUBMIT); // 스페이스를 받을 때 까지
-        system("cls");
-        menuDraw();
-    }
-    else if (menu == 2) {
-        system("cls");
-
-    }
 
 
 }
