@@ -12,9 +12,15 @@
 
 int main(void) {
     struct User* user;
+    int mode, level;
     srand(time(NULL));
     hide_cursor();
     titleDraw();
     menuDraw();
+    mode = selectMode(); // 연습 0, 랭크 1
+    system("cls");
+    if (mode == 0) level = selectLevel(); // 초급 0, 중급 1, 고급 2
+    system("cls");
+    printf("모드: %d\n", mode);
     return 0;
 }
