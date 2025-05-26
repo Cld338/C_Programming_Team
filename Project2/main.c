@@ -22,13 +22,11 @@ int main(void) {
         system("cls");
         show_cursor();
         user = loginScreen();           // 로그인 화면으로
-        getchar();
-        getchar();
         system("cls");
         //printf("%d", user->score); // user 포인터 받아서 사용
         
         hide_cursor();
-        create_ladder(ladder); // 
+        create_ladder(ladder); // 그냥 확인용
         run(ladder);
     }
     else if (menu == 1) {

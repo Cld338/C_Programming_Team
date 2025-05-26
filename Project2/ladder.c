@@ -181,7 +181,7 @@ void print_ladder(int ladder[ARR_SIZE][ARR_SIZE]) {
                         else if (ladder[i][j] == 2) {
                             setColor(4);
                             printf("%s", VERTICAL_LINE_CHAR);
-                            setColor(0);
+                            setColor(15);
                         }
                         else {
                             printf(" ");
