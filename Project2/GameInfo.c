@@ -13,4 +13,5 @@ void GameInfo() {
 
 
     for (int i = 0; i < 3; i++) printf("\n");
+    setColor(15);
 }
