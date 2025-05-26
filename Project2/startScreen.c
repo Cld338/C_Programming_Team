@@ -17,6 +17,7 @@ void titleDraw() {
 
 
     for (int i = 0; i < 3; i++) printf("\n");
+    setColor(15);
 }
 
 
@@ -25,7 +26,7 @@ struct User* menuDraw() {
     int x = 54;
     int y = 10;
     struct User* user;
-
+    setColor(14);
     gotoxy(x - 1, y);
     printf(">게임시작");
     gotoxy(x, y+1);
@@ -65,6 +66,7 @@ struct User* menuDraw() {
         show_cursor();
         user = loginScreen();           // 로그인 화면으로
         while (keyControl() != SUBMIT);
+        setColor(15);
         return user;
     }
     else if (menu == 1) {
@@ -76,6 +78,7 @@ struct User* menuDraw() {
     }
     else if (menu == 2) {
         system("cls");
+        setColor(15);
         return NULL;
     }
 
