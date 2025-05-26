@@ -5,7 +5,7 @@
 #include "ladder.h"
 #include "ladderPlayer.h"
 #include "util.h"
-
+#include "selectGameScreen.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -14,6 +14,7 @@
 int main(void) {
     struct User* user;
     int ladder[ARR_SIZE][ARR_SIZE];
+    int mode, level;
     srand(time(NULL));
     hide_cursor();
     titleDraw();
@@ -22,13 +23,16 @@ int main(void) {
         system("cls");
         show_cursor();
         user = loginScreen();           // 로그인 화면으로
+        while (keyControl() != SUBMIT);
         system("cls");
-
-        //printf("%d", user->score); // user 포인터 받아서 사용
-        
         hide_cursor();
-        // create_ladder(ladder);
-        // run(ladder);
+        
+        mode = selectMode(); // 연습 0, 랭크 1
+        system("cls");
+        if (mode == 0) level = selectLevel(); // 초급 0, 중급 1, 고급 2
+        system("cls");
+        printf("모드: %d\n", mode);
+        
     }
     else if (menu == 1) {
         system("cls");
