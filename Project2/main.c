@@ -16,8 +16,5 @@ int main(void) {
     hide_cursor();
     titleDraw();
     menuDraw();
-
-
-    
     return 0;
 }
