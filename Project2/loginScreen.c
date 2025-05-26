@@ -7,14 +7,14 @@
 
 struct User* loginScreen() {
 
-    for (int i = 0; i < 3; i++) printf("\n");
+	for (int i = 0; i < 3; i++) printf("\n");
 
-    for (int i = 0; i < 50; i++) printf(" ");
-    setColor(14);
-    printf("로그인\n");
+	for (int i = 0; i < 50; i++) printf(" ");
+	setColor(14);
+	printf("로그인\n");
 
 
-    for (int i = 0; i < 3; i++) printf("\n");
+	for (int i = 0; i < 3; i++) printf("\n");
 
 	struct User user;
 	char filename[120];
