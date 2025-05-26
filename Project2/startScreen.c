@@ -20,7 +20,7 @@ void titleDraw() {
 }
 
 
-void menuDraw() {
+struct User* menuDraw() {
     int menu;
     int x = 54;
     int y = 10;
@@ -65,17 +65,18 @@ void menuDraw() {
         show_cursor();
         user = loginScreen();           // 로그인 화면으로
         while (keyControl() != SUBMIT);
+        return user;
     }
     else if (menu == 1) {
         system("cls");
         GameInfo();      // 게임방법 화면으로
         while (keyControl() != SUBMIT); // 스페이스를 받을 때 까지
         system("cls");
-        menuDraw();
+        return menuDraw();
     }
     else if (menu == 2) {
         system("cls");
-
+        return NULL;
     }
 
 
