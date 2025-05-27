@@ -1,5 +1,6 @@
 #include "ladder.h"
 #include "util.h"
+#include "word.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -20,7 +21,7 @@ void mark_player(int row, int col) {
     setColor(15);
 }
 
-void run(int (*map)[ARR_SIZE][ARR_SIZE]) {
+void run(int (*map)[ARR_SIZE][ARR_SIZE], char *cw[CHO_SIZE], int size) {
     // 확인용으로 만든 함수
     // 나중에 단어 입력 시로 수정하기.
     int x = 0, y = 0;
@@ -39,7 +40,7 @@ void run(int (*map)[ARR_SIZE][ARR_SIZE]) {
             case 77: dx = 1;  break; // →
             }
         }
-
+        if (dx == 0 && dy == 0) continue;
         int nx = x + dx;
         int ny = y + dy;
 
@@ -47,9 +48,24 @@ void run(int (*map)[ARR_SIZE][ARR_SIZE]) {
             continue;
         int next = (*map)[ny][nx];
         if ((next == 1) || (next == 2)) {
-            x = nx + dx; //위치 갱신
-            y = ny + dy;
-            mark_player(y, x);
+            show_cursor();
+            int target_score;
+            if (next == 1) target_score = 1;
+            else if (next == 2) target_score = 3;
+            if (cho_practice(cw, size, target_score) == 1) {
+                system("cls");
+                print_ladder(map);
+                hide_cursor();
+                x = nx + dx;
+                y = ny + dy;
+                mark_player(y, x);
+            }
+            else {
+                continue;
+            }
+            if (y == 0 && x == ARR_SIZE - 1) {
+                return 1;
+            }
         }
         else {
             continue;
