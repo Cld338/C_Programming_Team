@@ -3,7 +3,7 @@
 
 void titleDraw();
 int keyControl();
-int menuDraw();
+struct User* menuDraw();
 void gotoxy(int, int);
 
 
